@@ -1,0 +1,34 @@
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.deps.json
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.runtimeconfig.json
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.dll
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.pdb
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM.Entities.dll
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM.Entities.pdb
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.csproj.AssemblyReference.cache
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.AssemblyInfoInputs.cache
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.AssemblyInfo.cs
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.csproj.CoreCompileInputs.cache
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.csproj.CopyComplete
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.dll
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\refint\CI PLATFORM .repository.dll
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.pdb
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.genruntimeconfig.cache
+D:\GITHUB UPLOAD FOR CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\ref\CI PLATFORM .repository.dll
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.deps.json
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.runtimeconfig.json
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.dll
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM .repository.pdb
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM.Entities.dll
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\bin\Debug\net6.0\CI PLATFORM.Entities.pdb
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.csproj.AssemblyReference.cache
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.AssemblyInfoInputs.cache
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.AssemblyInfo.cs
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.csproj.CoreCompileInputs.cache
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.csproj.CopyComplete
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.dll
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\refint\CI PLATFORM .repository.dll
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.pdb
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\CI PLATFORM .repository.genruntimeconfig.cache
+D:\GITHUB CI PLATFORM\MVC OF CI PLATFORM\CI PLATFORM .repository\obj\Debug\net6.0\ref\CI PLATFORM .repository.dll

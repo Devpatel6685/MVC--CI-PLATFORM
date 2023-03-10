@@ -1,0 +1,508 @@
+﻿@model  CI_PLATFORM.Entities.ViewModels.MissionViewmodel
+@using Microsoft.AspNetCore.Http;
+
+@{
+    var country =(List<Country>)ViewData["country"];
+    var city =(List<City>)ViewData["city"];
+    var theme =(List<MissionTheme>)ViewData["theme"];
+    var skill =(List<Skill>)ViewData["skill"];
+    var mission = (List<Mission>)ViewData["Mission"];
+    var missionskills = (List<MissionSkill>)ViewData["missionSkill"];
+}
+@inject IHttpContextAccessor Accessor;
+@{
+    Layout ="";
+}
+@{
+    var firstname_session = @Accessor.HttpContext.Session.GetString("username");
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/platformlandingStyle.css">
+  
+</head>
+
+<body>
+    <div>
+        @if (TempData["LOGIN"] != null)
+        {
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <script type="text/javascript">
+                toastr.success('@TempData["LOGIN"]');
+            </script>
+        }
+    </div>
+    <nav class="navbar navbar-expand-sm bg-body-light border-bottom">
+        <div class="container-fluid mx-auto">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" id="navbarSupportedContent" tabindex="-1">
+                <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Explore
+                        </a>
+                        <ul class="dropdown-menu dropdown-border">
+                            <li><a class="dropdown-item" href="#">Policy</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Stories</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu dropdown-border">
+                            <li><a class="dropdown-item" href="#">Policy</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="dropdown mx-5" id="prof-drop">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/Assets/user-img.png" class="rounded-circle" alt="profile">
+                <span id="hide">@firstname_session</span>
+            </a>
+            <ul class="dropdown-menu" id="drop-pos">
+                <li><a class="dropdown-item" href="#">Policy</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+      
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" asp-action="LogOut" asp-controller="Home">Logout</a></li>
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="dropdown mx-5 d-flex" id="prof-drop">
+
+            <ul class="navbar-nav log-register flex-row">
+                <li class="nav-item">
+                    <a class="nav-link active btn btn-warning" aria-current="page" asp-action="LOGIN" asp-controller="HOME">Login</a>
+                </li>
+                <li class="nav-item ms-1">
+                    <a class="nav-link active btn btn-warning" aria-current="page" asp-action="REGISTRATIONPAGE" asp-controller="HOME">Register</a>
+                </li>
+            </ul>
+         
+            
+        </div>
+       
+    }
+    
+   
+    @{
+        //var searchQuery = Context.Request.Query["q"];
+        
+    }
+    <div class="container-fluid border-bottom navbar-expand-md">
+        <div class="row mx-5 d-flex justify-content-between">
+            <form action="" method="get" class="col-11 col-md-4">
+                <img src="~/Assets/search.png" alt="search-icon" class="position-absolute pt-3 ps-1">
+                <input class="form-control me-2 ps-5 pt-3 pb-3 search-border" @*value="@searchQuery" name="q"*@ id="search-input" type="search" placeholder="Search" aria-label="Search" name="">
+            </form>
+            @*<div class="d-flex col-11 col-md-4" role="search">
+                <img src="/Assets/search.png" alt="search-icon" class="position-absolute pt-3 ps-1">
+                <input class="form-control me-2 ps-5 pt-3 pb-3" id="search-border" type="search" placeholder="Search" aria-label="Search">
+            </div>*@
+            <button class="navbar-toggler col-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#filter" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><img src="/Assets/filter.png" alt=""></span>
+            </button>
+            <div id="filter" class="offcanvas offcanvas-start d-flex flex-row col-md-8" tabindex="-1">
+
+                <select class="form-control form-select" id="Countries">
+                    <option>Country</option>
+                </select>
+                <select class="form-control form-select" id="Cities">
+                    <option>City</option>
+                </select>
+                @*<li class="list-group-item  dropdown border-start col-md-3 border-end pt-3 pb-3 noborder">
+                    <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Country
+                    </a>
+                    <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
+                        @foreach (var i in country)
+                        {
+                            <div class="form-check ms-3" id="Countries">
+                                <input class="form-check-input checkbox" type="checkbox" value="@i.Name" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    @i.Name
+                                </label>
+                            </div>
+                        }
+                        
+                        
+                    </ul>
+
+                </li>
+                <li class="list-group-item dropdown col-md-3 border-end pt-3 pb-3 noborder">
+                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        City
+                    </a>
+                    <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
+                    @foreach (var i in city)
+                    {
+                            <div class="form-check ms-3" id="Cities">
+                            <input class="form-check-input checkbox" type="checkbox" value="@i.Name" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                @i.Name
+                            </label>
+                        </div>
+                    }
+                    </ul>
+                   
+                </li>*@
+                <li class="list-group-item dropdown col-md-3 border-end pt-3 pb-3 noborder">
+                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Theme
+                    </a>
+                     <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
+                    @foreach (var i in theme)
+                    {
+                            <div class="form-check ms-3" id="Theme">
+                            <input class="form-check-input checkbox" type="checkbox" value="@i.Title" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                @i.Title
+                            </label>
+                        </div>
+                    }
+                    </ul>
+                    
+                </li>
+                <li class="list-group-item dropdown border-end col-md-3 pt-3 pb-3 noborder">
+                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Skills
+                    </a>
+                    <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
+                    @foreach (var i in skill)
+                    {
+                        <div class="form-check ms-3">
+                            <input class="form-check-input checkbox" type="checkbox" value="@i.SkillName" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                @i.SkillName
+                            </label>
+                        </div>
+                        
+                    }
+                    </ul>
+                    
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="filters-section d-flex align-items-center flex-wrap justify-content-center">
+    </div>
+    <div class="d-flex mt-4 mx-5 justify-content-between" id="gridList">
+        <h3 class="ms-3">Explore <span id="count">
+           @{
+              
+                @Model.totalrecords
+            }
+            
+        </span> missions</h3>
+        <div class="d-flex mx-3">
+            
+                <li class="list-group-item  dropdown  pt-3 pb-3 ">
+                    <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort by
+                    </a>
+                    <ul class="dropdown-menu position-absolute" aria-labelledby="navbarDropdown" style="right:2px">
+                        <div class="form-check ms-3">
+                            <a class="dropdown-item" asp-controller="Mission" asp-action="platformLanding" asp-route-sortId="1">Newest</a>
+                        </div>
+                        <div class="form-check ms-3">
+                        <a class="dropdown-item" asp-controller="Mission" asp-action="platformLanding" asp-route-sortId="2">Oldest</a>
+                        </div>
+                        <div class="form-check ms-3">
+                        <a class="dropdown-item" asp-controller="Mission" asp-action="platformLanding" asp-route-sortId="3">Lowest available seats</a>
+                        </div>
+                        <div class="form-check ms-3">
+                        <a class="dropdown-item" asp-controller="Mission" asp-action="platformLanding" asp-route-sortId="4">Highest available seats</a>
+
+                        </div>
+                        <div class="form-check ms-3">
+                            <a class="dropdown-item" asp-controller="Mission" asp-action="platfromLanding" asp-route-sortId="5">Sort by my favourite</a>
+                        </div>
+                        <div class="form-check ms-3">
+                            <a class="dropdown-item" asp-controller="Mission" asp-action="platformLanding" asp-route-sortId="6">Sort by deadline</a>
+                        </div>
+
+                    </ul>
+
+                </li>
+                
+                
+
+            <button class="border-0 btn btn-grid"><img src="/Assets/grid.png" alt="grid"></button>
+            <button class="border-0 btn px-0 btn-list"><img src="/Assets/list.png" alt="list"></button>
+        </div>
+    </div>
+    <div class="container grid-container">
+        @if(Model.totalrecords == 0){
+            <div class="d-flex mt-5 flex-column">
+                <div class="mx-auto"><h3>No Mission Found</h3></div>
+                <div class="mx-auto mt-3"><button class="py-2 px-3 mx-auto apply">Submit New Mission <img src="~/Assets/right-arrow.png" alt="" class="ms-2"></button></div>
+            </div>
+        }else{
+        <div class="row g-4 mx-auto mt-1">
+            @{
+                foreach (var i in Model.Missions)
+                {
+                   // if (string.IsNullOrEmpty(searchQuery) || (i.Theme.Title + i.City.Name + i.Title + i.OrganizationName + i.ShortDescription).Contains(searchQuery))
+                   // {
+                        <div class="col-md-6 col-lg-4 item">
+                            <div class=" card  d-flex">
+                            @if (@i.EndDate < @DateTime.Now)
+                                            {
+                                               <div class="d-flex position-absolute pt-2 badgeclass">
+                                                <span class="badge1 bg-warning text-dark ms-1 pt-2">Closed</span><div class="arrow-right"></div> 
+                                               </div>
+                                            }
+                                <div class="d-flex flex-column position-relative">
+                                    <div class="align-self-end position-absolute top-1 text-light icon rounded-pill px-2 me-1 mt-1">
+                                        <img class="pin" src="~/Assets/pin.png" alt=""> @i.City.Name
+                                    </div>
+                                    <img src="~/Assets/Grow-Trees-On-the-path-to-environment-sustainability-1.png" class="card-img-top h-100" alt="Skyscrapers" />
+                                    <div class="d-flex flex-column align-self-end position-absolute rounded-circle mt-5 pt-5 me-2">
+                                        <a><img class="heart rounded-circle icon p-2 mb-1 mt-4" src="~/Assets/heart.png" alt=""></a>
+                                        <a><img class="heart rounded-circle icon p-2" src="~/Assets/add1.png" alt=""></a>
+                                    </div>
+                                    <div class="mx-auto d-flex position-absolute px-3 imgTitle">@i.Theme.Title</div>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex justify-content-between card-start d-none">
+                                        <div class="d-flex">
+                                            <div class="me-2">
+                                                <img src="~/Assets/pin1.png" alt="">
+                                                <span>@i.City.Name</span>
+                                            </div>
+                                            <div class="me-2">
+                                                <img src="~/Assets/web.png" alt="">
+                                                <span>@i.Theme.Title</span>
+                                            </div>
+                                            <div>
+                                                <img src="~/Assets/organization.png" alt="">
+                                                <span>@i.OrganizationName</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+
+                                                <img class="star" src="~/Assets/selected-star.png" alt="">
+                                                <img class="star" src="~/Assets/selected-star.png" alt="">
+                                                <img class="star" src="~/Assets/selected-star.png" alt="">
+                                                <img class="star" src="~/Assets/selected-star.png" alt="">
+                                                <img class="star" src="~/Assets/selected-star.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="card-title">@i.Title</h5>
+                                    <p class="card-text">@i.Description</p>
+                                    <div class="d-flex justify-content-between grid-element">
+                                        <p>@i.OrganizationName</p>
+                                        <div>
+                                            <img class="star" src="~/Assets/selected-star.png" alt="">
+                                            <img class="star" src="~/Assets/selected-star.png" alt="">
+                                            <img class="star" src="~/Assets/selected-star.png" alt="">
+                                            <img class="star" src="~/Assets/selected-star.png" alt="">
+                                            <img class="star" src="~/Assets/selected-star.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="position-relative d-flex justify-content-center grid-element">
+                                        <div class="mx-auto px-2 py-1 rounded-pill border duration d-flex grid-element z-1" style="background-color:white">
+                                            @if(DateTime.Today > i.StartDate && DateTime.Today < i.EndDate)
+                                            {
+                                                <span>Ongoing Oppertunity</span>
+                                            }
+                                            else
+                                            {
+                                                <span>From @i.StartDate?.ToString("dd/MM/yyyy") until @i.EndDate?.ToString("dd/MM/yyyy")</span>
+                                            }
+                                        </div>
+                                        <hr class="position-absolute w-100">
+                                    </div>
+                                
+                                <div class="d-none justify-content-between mx-2 mt-2 flex-wrap card-start">
+                                    <div class="d-flex flex-wrap justify-content-between ">
+                                        <div class="d-flex me-2">
+                                            <img class="img1 mt-2 me-1" src="~/Assets/Seats-left.png" alt="Seats-left">&nbsp;
+                                            <div>
+                                                <span class="fs-6 mb-0">@i.Availability</span>
+                                                <p class="m-0">Seats left</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex me-2">
+                                            @if (i.MissionType == "TIME") { 
+                                            <img class="img1 mt-2 me-1" src="~/Assets/hours.png" alt="Deadline">@:&nbsp;
+                                            <div>
+                                                <span class="fs-6 mb-0">@i.EndDate?.ToString("d")</span>
+                                                <p class="m-0">Deadline</p>
+                                            </div>
+                                                }
+                                                else
+                                                {
+                                                    <img class="img1 mt-2 me-2" src="~/Assets/achieved.png" alt="Seats-left">
+                                                    <div>
+                                                        <div class="progress mt-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            <div class="progress-bar bg-warning" style="width: 25%"></div>
+                                                        </div>
+                                                        <p class="m-0">8000 achieved</p>
+                                                    </div>
+                                                }
+                                                </div>
+                                        <div class="d-flex me-2">
+                                            <img class="img1 mt-2 me-1" src="~/Assets/calender.png" alt="Deadline">&nbsp;
+                                                <div>
+                                                    <p class="m-0">From @i.StartDate?.ToString("d")</p>
+                                                    <p class="m-0">until @i.EndDate?.ToString("d")</p>
+                                                </div>
+                                            
+                                           </div>
+                                         
+                                        <div class="d-flex ">
+                                            <img class="img1 mt-2 me-1" src="~/Assets/hours.png" alt="Deadline">&nbsp;
+                                            <div>
+                                                <span class="fs-6 mb-0">Skills</span>
+                                                <p class="m-0">
+                                                    @foreach (var ms in missionskills)
+                                                    {
+                                                        if (i.MissionId == ms.MissionId)
+                                                        {
+                                                            <span>@ms.Skill.SkillName, </span>
+                                                        }
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div>
+                                        <button class="py-2 px-3 mx-auto apply">View Details <img src="~/Assets/right-arrow.png" alt="" class="ms-2"></button>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mx-2 mt-2 grid-element">
+                                    <div class="d-flex">
+                                        <img class="img1 mt-2 me-1" src="~/Assets/Seats-left.png" alt="Seats-left">
+                                        <div>
+                                            <span class="fs-6 mb-0">@i.Availability</span>
+                                            <p class="m-0">Seats left</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex">
+                                            @if (i.MissionType == "TIME")
+                                            {
+                                                <img class="img1 mt-2 me-1" src="~/Assets/hours.png" alt="Deadline">
+                                                <div>
+                                                    <span class="fs-6 mb-0">@i.EndDate?.ToString("d")</span>
+                                                    <p class="m-0">Deadline</p>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <img class="img1 mt-2 me-2" src="~/Assets/achieved.png" alt="Seats-left">
+                                                <div>
+                                                    <div class="progress mt-2" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-warning" style="width: 25%"></div>
+                                                    </div>
+                                                    <p class="m-0">8000 achieved</p>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" d-flex grid-element">
+                                    <button class="py-2 px-3 mx-auto apply">
+                                        Apply <img src="~/Assets/right-arrow.png" alt="" class="ms-2">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                       
+                   // }
+
+                } 
+            }
+                
+        
+            
+         </div>
+          }  
+    </div>    
+    <div class="d-flex justify-content-center">
+    <cs-pager cs-paging-pagenumber=@Model.currentPage
+                cs-paging-totalitems=@Model.totalrecords
+                cs-paging-pagesize="9"
+                cs-pagenumber-param="pageIndex"
+                asp-controller="Mission"
+                asp-action="platformLanding"
+                  cs-pager-li-current-class="page-item active"
+                  cs-pager-li-other-class="page-item"
+                  cs-pager-li-non-active-class="page-item disabled"
+                  cs-pager-link-current-class="page-link"
+                  cs-pager-link-other-class="page-link"></cs-pager>
+        </div>
+   @* <nav aria-label="Page navigation example" class="d-flex mt-4">
+        <ul class="pagination mx-auto">
+            <li class="page-item me-2">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <img src="/Assets/previous.png" alt="">
+                </a>
+            </li>
+            <li class="page-item me-2">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <img src="/Assets/left.png" alt="">
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link me-2 text-secondary" href="#">1</a></li>
+            <li class="page-item"><a class="page-link me-2 text-secondary" href="#">2</a></li>
+            <li class="page-item"><a class="page-link me-2 text-secondary" href="#">3</a></li>
+            <li class="page-item me-2">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <img src="/Assets/right-arrow1.png" alt="">
+                </a>
+            </li>
+            <li class="page-item me-2">
+                <a class="page-link" href="#" aria-label="Next">
+                    <img src="/Assets/next.png" alt="">
+                </a>
+            </li>
+        </ul>
+    </nav>*@
+
+ 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="/js/plaltformLanding.js"></script>
+  
+
+
+</body>
+
+</html>
