@@ -155,12 +155,6 @@
 #Countries{
     border:none
 }
-.apply {
-    border: 2px solid orange;
-    border-radius: 20px;
-    color: orange;
-    background-color: white;
-}
 
 #Cities{
     border: none

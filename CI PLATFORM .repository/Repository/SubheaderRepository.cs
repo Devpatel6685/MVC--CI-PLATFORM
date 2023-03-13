@@ -34,9 +34,17 @@ namespace CI_PLATFORM_.repository.Repository
             var Country = _cIPLATFORMDbContext.Countries.ToList();
             return Country;
         }
-        public List<City> GetCities(int id)
+        public List<City> GetCities(List<int> id)
         {
-            var cities = _cIPLATFORMDbContext.Cities.Where(m =>m.CountryId==id).ToList();
+            var cities = new List<City>();
+            foreach (var cityid in id)
+            {
+                List<City> city = _cIPLATFORMDbContext.Cities.Where(m => m.CountryId == cityid).ToList();
+                foreach (var c in city)
+                {
+                    cities.Add(c);
+                }
+            }
             return cities;
         }
         public List<MissionSkill> GetMissionSkillsList()

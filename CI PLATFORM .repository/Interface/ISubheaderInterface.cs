@@ -17,9 +17,9 @@ namespace CI_PLATFORM_.repository.Interface
         public  List<Skill>GetSkillsList();
 
         public List<MissionSkill>GetMissionSkillsList();
-         public List<GoalMission> GetGoalMissionList();
+         
         public List<Country> GetCountries();
-        public List<City> GetCities(int id);
-
+        public List<City> GetCities(List<int> id);
+        public List<GoalMission> GetGoalMissionList();
     }
 }

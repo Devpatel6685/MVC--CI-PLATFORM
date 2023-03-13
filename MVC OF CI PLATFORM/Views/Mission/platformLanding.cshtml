@@ -8,6 +8,7 @@
     var skill =(List<Skill>)ViewData["skill"];
     var mission = (List<Mission>)ViewData["Mission"];
     var missionskills = (List<MissionSkill>)ViewData["missionSkill"];
+    var goalmissions = (List<GoalMission>)ViewData["GoalMission"];
 }
 @inject IHttpContextAccessor Accessor;
 @{
@@ -30,6 +31,7 @@
 </head>
 
 <body>
+    <partial name ="header" model="Model"/>
     <div>
         @if (TempData["LOGIN"] != null)
         {
@@ -41,177 +43,8 @@
             </script>
         }
     </div>
-    <nav class="navbar navbar-expand-sm bg-body-light border-bottom">
-        <div class="container-fluid mx-auto">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-start" id="navbarSupportedContent" tabindex="-1">
-                <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Explore
-                        </a>
-                        <ul class="dropdown-menu dropdown-border">
-                            <li><a class="dropdown-item" href="#">Policy</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Stories</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Policy
-                        </a>
-                        <ul class="dropdown-menu dropdown-border">
-                            <li><a class="dropdown-item" href="#">Policy</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="dropdown mx-5" id="prof-drop">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/Assets/user-img.png" class="rounded-circle" alt="profile">
-                <span id="hide">@firstname_session</span>
-            </a>
-            <ul class="dropdown-menu" id="drop-pos">
-                <li><a class="dropdown-item" href="#">Policy</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-      
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><a class="dropdown-item" asp-action="LogOut" asp-controller="Home">Logout</a></li>
-            </ul>
-        </div>
-    }
-    else
-    {
-        <div class="dropdown mx-5 d-flex" id="prof-drop">
 
-            <ul class="navbar-nav log-register flex-row">
-                <li class="nav-item">
-                    <a class="nav-link active btn btn-warning" aria-current="page" asp-action="LOGIN" asp-controller="HOME">Login</a>
-                </li>
-                <li class="nav-item ms-1">
-                    <a class="nav-link active btn btn-warning" aria-current="page" asp-action="REGISTRATIONPAGE" asp-controller="HOME">Register</a>
-                </li>
-            </ul>
-         
-            
-        </div>
-       
-    }
-    
-   
-    @{
-        //var searchQuery = Context.Request.Query["q"];
-        
-    }
-    <div class="container-fluid border-bottom navbar-expand-md">
-        <div class="row mx-5 d-flex justify-content-between">
-            <form action="" method="get" class="col-11 col-md-4">
-                <img src="~/Assets/search.png" alt="search-icon" class="position-absolute pt-3 ps-1">
-                <input class="form-control me-2 ps-5 pt-3 pb-3 search-border" @*value="@searchQuery" name="q"*@ id="search-input" type="search" placeholder="Search" aria-label="Search" name="">
-            </form>
-            @*<div class="d-flex col-11 col-md-4" role="search">
-                <img src="/Assets/search.png" alt="search-icon" class="position-absolute pt-3 ps-1">
-                <input class="form-control me-2 ps-5 pt-3 pb-3" id="search-border" type="search" placeholder="Search" aria-label="Search">
-            </div>*@
-            <button class="navbar-toggler col-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#filter" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"><img src="/Assets/filter.png" alt=""></span>
-            </button>
-            <div id="filter" class="offcanvas offcanvas-start d-flex flex-row col-md-8" tabindex="-1">
-
-                <select class="form-control form-select" id="Countries">
-                    <option>Country</option>
-                </select>
-                <select class="form-control form-select" id="Cities">
-                    <option>City</option>
-                </select>
-                @*<li class="list-group-item  dropdown border-start col-md-3 border-end pt-3 pb-3 noborder">
-                    <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Country
-                    </a>
-                    <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
-                        @foreach (var i in country)
-                        {
-                            <div class="form-check ms-3" id="Countries">
-                                <input class="form-check-input checkbox" type="checkbox" value="@i.Name" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    @i.Name
-                                </label>
-                            </div>
-                        }
-                        
-                        
-                    </ul>
-
-                </li>
-                <li class="list-group-item dropdown col-md-3 border-end pt-3 pb-3 noborder">
-                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        City
-                    </a>
-                    <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
-                    @foreach (var i in city)
-                    {
-                            <div class="form-check ms-3" id="Cities">
-                            <input class="form-check-input checkbox" type="checkbox" value="@i.Name" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                @i.Name
-                            </label>
-                        </div>
-                    }
-                    </ul>
-                   
-                </li>*@
-                <li class="list-group-item dropdown col-md-3 border-end pt-3 pb-3 noborder">
-                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Theme
-                    </a>
-                     <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
-                    @foreach (var i in theme)
-                    {
-                            <div class="form-check ms-3" id="Theme">
-                            <input class="form-check-input checkbox" type="checkbox" value="@i.Title" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                @i.Title
-                            </label>
-                        </div>
-                    }
-                    </ul>
-                    
-                </li>
-                <li class="list-group-item dropdown border-end col-md-3 pt-3 pb-3 noborder">
-                    <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Skills
-                    </a>
-                    <ul class="dropdown-menu drop" aria-labelledby="navbarDropdown">
-                    @foreach (var i in skill)
-                    {
-                        <div class="form-check ms-3">
-                            <input class="form-check-input checkbox" type="checkbox" value="@i.SkillName" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                @i.SkillName
-                            </label>
-                        </div>
-                        
-                    }
-                    </ul>
-                    
-                </li>
-            </div>
-        </div>
-    </div>
-    <div class="filters-section d-flex align-items-center flex-wrap justify-content-center">
-    </div>
-    <div class="d-flex mt-4 mx-5 justify-content-between" id="gridList">
+       <div class="d-flex mt-4 mx-5 justify-content-between" id="gridList">
         <h3 class="ms-3">Explore <span id="count">
            @{
               
@@ -318,6 +151,7 @@
                                     </div>
                                     <h5 class="card-title">@i.Title</h5>
                                     <p class="card-text">@i.Description</p>
+
                                     <div class="d-flex justify-content-between grid-element">
                                         <p>@i.OrganizationName</p>
                                         <div>
@@ -330,14 +164,22 @@
                                     </div>
                                     <div class="position-relative d-flex justify-content-center grid-element">
                                         <div class="mx-auto px-2 py-1 rounded-pill border duration d-flex grid-element z-1" style="background-color:white">
-                                            @if(DateTime.Today > i.StartDate && DateTime.Today < i.EndDate)
+                                            @if (i.MissionType == "GOAL")
+                                            {
+                                                foreach(var gm in goalmissions.Where(m=>m.MissionId == i.MissionId))
+                                                {
+                                                    <span>@gm.GoalObjectiveText</span>
+                                                }
+                                            } 
+
+                                       else if(DateTime.Today > i.StartDate && DateTime.Today < i.EndDate)
                                             {
                                                 <span>Ongoing Oppertunity</span>
                                             }
                                             else
                                             {
                                                 <span>From @i.StartDate?.ToString("dd/MM/yyyy") until @i.EndDate?.ToString("dd/MM/yyyy")</span>
-                                            }
+                                            }  
                                         </div>
                                         <hr class="position-absolute w-100">
                                     </div>
@@ -380,7 +222,7 @@
                                             
                                            </div>
                                          
-                                        <div class="d-flex ">
+                                            <div class="d-flex ">
                                             <img class="img1 mt-2 me-1" src="~/Assets/hours.png" alt="Deadline">&nbsp;
                                             <div>
                                                 <span class="fs-6 mb-0">Skills</span>
@@ -394,12 +236,15 @@
                                                     }
                                                 </p>
                                             </div>
+                                                
+                                        </div>
+                                           
+                                    </div>
+                                        <div>
+                                            <a class="py-2 px-3 mx-auto apply" asp-action="volunteerpage" asp-controller="Mission" asp-route-Id="@i.MissionId">View Details <img src="~/Assets/right-arrow.png" alt="" class="ms-2"></a>
                                         </div>
                                     </div>
-                                    </div>
-                                    <div>
-                                        <button class="py-2 px-3 mx-auto apply">View Details <img src="~/Assets/right-arrow.png" alt="" class="ms-2"></button>
-                                    </div>
+                                    
                                 </div>
                                 <div class="d-flex justify-content-between mx-2 mt-2 grid-element">
                                     <div class="d-flex">
@@ -448,21 +293,22 @@
         
             
          </div>
-          }  
+          }
+        <div class="d-flex justify-content-center">
+            <cs-pager cs-paging-pagenumber=@Model.currentPage
+                      cs-paging-totalitems=@Model.totalrecords
+                      cs-paging-pagesize="9"
+                      cs-pagenumber-param="pageIndex"
+                      asp-controller="Mission"
+                      asp-action="platformLanding"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link"></cs-pager>
+        </div>
     </div>    
-    <div class="d-flex justify-content-center">
-    <cs-pager cs-paging-pagenumber=@Model.currentPage
-                cs-paging-totalitems=@Model.totalrecords
-                cs-paging-pagesize="9"
-                cs-pagenumber-param="pageIndex"
-                asp-controller="Mission"
-                asp-action="platformLanding"
-                  cs-pager-li-current-class="page-item active"
-                  cs-pager-li-other-class="page-item"
-                  cs-pager-li-non-active-class="page-item disabled"
-                  cs-pager-link-current-class="page-link"
-                  cs-pager-link-other-class="page-link"></cs-pager>
-        </div>
+ 
    @* <nav aria-label="Page navigation example" class="d-flex mt-4">
         <ul class="pagination mx-auto">
             <li class="page-item me-2">

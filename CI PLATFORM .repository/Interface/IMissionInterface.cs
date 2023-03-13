@@ -12,8 +12,12 @@ namespace CI_PLATFORM_.repository.Interface
     
     public interface IMissionInterface
     {
-        List<Mission> GetMissionsList();
+        public List<Mission> GetMissionsList();
         public MissionViewmodel GetAll(int pageIndex, int pageSize, string keyword, int sortId);
+
+        public VolunteerMissionViewmodel GetMissionId(int Id);
+
+        public relatedmissionviewmodel GetRelatedMission(int Id);
 
     }
 }

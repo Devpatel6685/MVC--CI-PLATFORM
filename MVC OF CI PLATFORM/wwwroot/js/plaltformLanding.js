@@ -1,5 +1,81 @@
 $(document).ready(function () {
     getCountry();
+    getThemes();
+    getSkills();
+    $('#city').attr('disabled', true);
+    $('#country').change(function () {
+        $('#city').attr('disabled', false);
+        var link = "/Mission/City?id=";
+        /*        var id = $('.country:checkbox:checked');*/
+        var ids = []
+        $('.country:checkbox:checked').each(function () {
+            link = link + ($(this).attr("id")) + '&id=';
+        });
+        /*        ids = JSON.stringify( 'id'= ids);*/
+        console.log(ids);
+        $('#city').empty();
+        $.ajax({
+            url: link,
+            data: ids,
+            success: function (result) {
+                $.each(result, function (i, data) {
+                    $('#city').append('<div class="form-check ms-3"><input class="form-check-input checkbox" type="checkbox" value=' + data.name + ' id=' + data.id + '><label class="form-check-label" for=' + data.id + '>' + data.name + '</label></div>')
+                })
+            }
+        })
+    })
+
+    $('#search-border').change(function () {
+        var keyword = $(this).val()
+        var link = "/Mission/platformLanding?id=0&pageIndex=1&pageSize=9&SearchInputdata=" + keyword;
+        $('body').load(link);
+        /*$.ajax({
+            url: link,
+            success: function () {
+                console.log("success");
+            }
+            })*/
+    })
+    filter();
+});
+
+
+function getCountry() {
+    $.ajax({
+        url: '/Mission/Country',
+        success: function (result) {
+            $.each(result, function (i, data) {
+                $('#country').append('<div class="form-check ms-3"><input class="form-check-input checkbox country" type="checkbox" value=' + data.name + ' id=' + data.countryId + '><label class="form-check-label" for=' + data.countryId + '>' + data.name + '</label></div>')
+            })
+        }
+    })
+}
+
+function getThemes() {
+    $.ajax({
+        url: '/Mission/Theme',
+        success: function (result) {
+            $.each(result, function (i, data) {
+                $('#theme').append('<div class="form-check ms-3"><input class="form-check-input checkbox city" type="checkbox" value=' + data.title + ' id=' + data.missionThemeId + '><label class="form-check-label" for=' + data.missionThemeId + '>' + data.title + '</label></div>')
+            })
+        }
+    })
+}
+
+function getSkills() {
+    $.ajax({
+        url: '/Mission/Skill',
+        success: function (result) {
+            $.each(result, function (i, data) {
+                $('#skill').append('<div class="form-check ms-3"><input class="form-check-input checkbox" type="checkbox" value=' + data.skillName + ' id=' + data.skillId + '><label class="form-check-label" for=' + data.ski + '>' + data.skillName + '</label></div>')
+            })
+        }
+    })
+}
+/*$(document).ready(function () {
+    getCountry();
+    getThemes();
+    getSkills();
     $('#Cities').attr('disabled', true);
     $('#Countries').change(function () {
         $('#Cities').attr('disabled', false);
@@ -17,7 +93,32 @@ $(document).ready(function () {
         })
     })
 });
-
+*//*$(document).ready(function () {
+    getCountry();
+    getThemes();
+    getSkills();
+    $('#Cities').attr('disabled', true);
+    $('#Countries').change(function () {
+        $('#Cities').attr('disabled', false);
+        var link = "/Mission/city?id=";
+        *//*        var id = $('.country:checkbox:checked');*//*
+        var ids = []
+        $('.Countries:checkbox:checked').each(function () {
+            link = link + ($(this).attr("id")) + '&id=';
+        });
+        *//*        ids = JSON.stringify( 'id'= ids);*//*
+        console.log(ids);
+        $('#Cities').empty();
+        $.ajax({
+            url: link,
+            data: ids,
+            success: function (result) {
+                $.each(result, function (i, data) {
+                    $('#Cities').append('<div class="form-check ms-3"><input class="form-check-input checkbox" type="checkbox" value=' + data.name + ' id=' + data.id + '><label class="form-check-label" for=' + data.id + '>' + data.name + '</label></div>')
+                })
+            }
+        })
+    })*//*
 function getCountry() {
     $.ajax({
         url: '/Mission/country',
@@ -28,11 +129,61 @@ function getCountry() {
             })
         }
     })
+    }
+    *//*function getCountry() {
+        $.ajax({
+            url: '/Mission/country',
+            success: function (result) {
+                $.each(result, function (i, data) {
+                    $('#Countries').append('<div class="form-check ms-3"><input class="form-check-input checkbox country" type="checkbox" value=' + data.name + ' id=' + data.countryId + '><label class="form-check-label" for=' + data.countryId + '>' + data.name + '</label></div>')
+                })
+            }
+        })
+    }*//*
+function getThemes() {
+    $.ajax({
+        url: '/Mission/theme',
+        success: function (result) {
+            $.each(result, function (i, data) {
+                console.log(data);
+                $('#theme').append('<option value=' + data.missionThemeId + '>' + data.title + '</option>')
+            })
+        }
+    })
+}
+   *//* function getThemes() {
+        $.ajax({
+            url: '/Mission/theme',
+            success: function (result) {
+                $.each(result, function (i, data) {
+                    $('#theme').append('<div class="form-check ms-3"><input class="form-check-input checkbox" type="checkbox" value=' + data.title + ' id=' + data.missionThemeId + '><label class="form-check-label" for=' + data.missionThemeId + '>' + data.title + '</label></div>')
+                })
+            }
+        })
+    }
+*//*
+function getSkills() {
+    $.ajax({
+        url: '/Mission/skills',
+        success: function (result) {
+            $.each(result, function (i, data) {
+                console.log(data);
+                $('#skill').append('<option value=' + data.skillId + '>' + data.skillName + '</option>')
+            })
+        }
+    })
 }
 
-
-
-
+    *//*function getSkills() {
+        $.ajax({
+            url: '/Mission/skills',
+            success: function (result) {
+                $.each(result, function (i, data) {
+                    $('#skill').append('<div class="form-check ms-3"><input class="form-check-input checkbox" type="checkbox" value=' + data.skillName + ' id=' + data.skillId + '><label class="form-check-label" for=' + data.ski + '>' + data.skillName + '</label></div>')
+                })
+            }
+        })
+    }*/
 
 
 
@@ -158,15 +309,16 @@ $(document).on('click', '.btn-list', showList);
         $(document).ready(function() {
             $('#search-input').on('input', function () {
                 console.log('ok');
+
                 var searchQuery = $(this).val().toLowerCase();
                 console.log(searchQuery);
                 $('.item').each(function () {
                     var cardText = $(this).text().toLowerCase();
                     console.log(cardText);
                     if (cardText.indexOf(searchQuery) !== -1 || searchQuery.length === 0) {
-                        $(this).show();
+                        $(this).removeClass("d-none");
                     } else {
-                        $(this).hide();
+                        $(this).addClass("d-none");
                     }
                 });
 
